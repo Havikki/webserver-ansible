@@ -1,0 +1,43 @@
+---
+- name: Asenna apache2
+  apt:
+    name: apache2
+    state: present
+
+- name: Poista nginx jos asennettuna (konflikti portissa 80)
+  apt:
+    name: nginx
+    state: absent
+  notify: reload webserver
+
+- name: Aseta webroot-muuttuja
+  set_fact:
+    webroot: /var/www/html
+    webserver_service: apache2
+
+- name: Kopioi Apache VirtualHost-konfiguraatio
+  template:
+    src: apache.conf.j2
+    dest: /etc/apache2/sites-available/webserver-ansible.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: reload webserver
+
+- name: Aktivoi sivusto
+  command: a2ensite webserver-ansible.conf
+  args:
+    creates: /etc/apache2/sites-enabled/webserver-ansible.conf
+  notify: reload webserver
+
+- name: Poista oletussivu
+  command: a2dissite 000-default.conf
+  args:
+    removes: /etc/apache2/sites-enabled/000-default.conf
+  notify: reload webserver
+
+- name: Varmista että apache2 on käynnissä ja käynnistyy bootissa
+  service:
+    name: apache2
+    state: started
+    enabled: yes

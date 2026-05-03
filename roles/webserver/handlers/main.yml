@@ -1,0 +1,5 @@
+---
+- name: reload webserver
+  service:
+    name: "{{ webserver_service | default(webserver) }}"
+    state: reloaded

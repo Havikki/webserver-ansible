@@ -1,0 +1,21 @@
+---
+- name: Päivitä pakettivälimuisti
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Asenna valittu webpalvelin
+  include_tasks: "{{ webserver }}.yml"
+
+- name: Kopioi etusivu
+  template:
+    src: index.html.j2
+    dest: "{{ webroot }}/index.html"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: reload webserver
+
+- name: Asenna certbot
+  include_tasks: certbot.yml
+  when: install_certbot == "yes" and domain != ""

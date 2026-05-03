@@ -1,0 +1,10 @@
+[webservers]
+# Vaihda alle oma kohdekone
+# Paikallinen testaus:
+# localhost ansible_connection=local
+#
+# Etäkone SSH:lla:
+# 192.168.x.x ansible_user=vagrant
+# 10.0.0.x ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+localhost ansible_connection=local

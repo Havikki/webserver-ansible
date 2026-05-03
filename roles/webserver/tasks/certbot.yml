@@ -1,0 +1,25 @@
+---
+- name: Asenna certbot ja oikea plugin
+  apt:
+    name:
+      - certbot
+      - "python3-certbot-{{ webserver }}"
+    state: present
+
+- name: Hanki TLS-sertifikaatti ({{ domain }})
+  command: >
+    certbot --{{ webserver }}
+    --non-interactive
+    --agree-tos
+    --email {{ email }}
+    --redirect
+    -d {{ domain }}
+  args:
+    creates: /etc/letsencrypt/live/{{ domain }}/fullchain.pem
+  notify: reload webserver
+
+- name: Varmista automaattinen uusiminen (systemd timer)
+  service:
+    name: certbot.timer
+    state: started
+    enabled: yes

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ domain if domain != "" else ansible_hostname }} – webserver-ansible</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 2.5rem 3rem;
+      max-width: 540px;
+      width: 90%;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      {% if webserver == 'apache2' %}
+      background: #c0392b22;
+      color: #e74c3c;
+      border: 1px solid #e74c3c44;
+      {% else %}
+      background: #27ae6022;
+      color: #2ecc71;
+      border: 1px solid #2ecc7144;
+      {% endif %}
+    }
+    h1 { font-size: 1.6rem; margin-bottom: 0.75rem; }
+    p  { color: #8b949e; line-height: 1.6; margin-bottom: 0.5rem; }
+    .meta {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #30363d;
+      font-size: 0.8rem;
+      color: #484f58;
+    }
+    .meta a { color: #58a6ff; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge">{{ webserver }}</div>
+    <h1>Asennus onnistui</h1>
+    <p>Tämä sivu on asennettu automaattisesti Ansiblella.</p>
+    <p>Webpalvelimena toimii <strong>{{ webserver }}</strong>
+       {% if install_certbot == "yes" and domain != "" %}
+       HTTPS-sertifikaatilla osoitteessa <strong>{{ domain }}</strong>.
+       {% else %}
+       ilman TLS-sertifikaattia.
+       {% endif %}
+    </p>
+    <div class="meta">
+      Asennettu koneelle <strong>{{ ansible_hostname }}</strong><br>
+      Projekti: <a href="https://github.com/Havikki/webserver-ansible">github.com/Havikki/webserver-ansible</a>
+    </div>
+  </div>
+</body>
+</html>

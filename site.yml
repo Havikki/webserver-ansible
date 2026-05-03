@@ -1,0 +1,39 @@
+---
+- name: Webpalvelimen automaattinen asennus
+  hosts: all
+  become: true
+
+  vars_prompt:
+    - name: webserver
+      prompt: "\nValitse webpalvelin\n  [1] apache2\n  [2] nginx\nValinta (apache2/nginx)"
+      default: "nginx"
+      private: no
+
+    - name: install_certbot
+      prompt: "\nAsenna certbot HTTPS-sertifikaattia varten? (yes/no)"
+      default: "no"
+      private: no
+
+    - name: domain
+      prompt: "\nDomain-nimi (esim. example.com) - jätä tyhjäksi jos ei ole"
+      default: ""
+      private: no
+
+    - name: email
+      prompt: "\nSähköposti certbot-ilmoituksia varten (tarvitaan vain jos certbot=yes)"
+      default: ""
+      private: no
+
+  pre_tasks:
+    - name: Tarkista webserver-muuttujan arvo
+      fail:
+        msg: "Virheellinen valinta '{{ webserver }}'. Valitse apache2 tai nginx."
+      when: webserver not in ['apache2', 'nginx']
+
+    - name: Tarkista domain jos certbot halutaan
+      fail:
+        msg: "Domain-nimi vaaditaan certbotin asennukseen."
+      when: install_certbot == "yes" and domain == ""
+
+  roles:
+    - webserver
