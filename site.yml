@@ -4,9 +4,9 @@
   become: true
 
   vars_prompt:
-    - name: webserver
-      prompt: "\nValitse webpalvelin\n  [1] apache2\n  [2] nginx\nValinta (apache2/nginx)"
-      default: "nginx"
+    - name: webserver_choice
+      prompt: "\nValitse webpalvelin\n  1 = apache2\n  2 = nginx\nValinta (1/2)"
+      default: "2"
       private: no
 
     - name: install_certbot
@@ -27,8 +27,12 @@
   pre_tasks:
     - name: Tarkista webserver-muuttujan arvo
       fail:
-        msg: "Virheellinen valinta '{{ webserver }}'. Valitse apache2 tai nginx."
-      when: webserver not in ['apache2', 'nginx']
+        msg: "Virheellinen valinta '{{ webserver_choice }}'. Valitse 1 (apache2) tai 2 (nginx)."
+      when: webserver_choice not in ['1', '2', 'apache2', 'nginx']
+
+    - name: Aseta webserver-muuttuja valinnan perusteella
+      set_fact:
+        webserver: "{{ 'apache2' if webserver_choice in ['1', 'apache2'] else 'nginx' }}"
 
     - name: Tarkista domain jos certbot halutaan
       fail:
