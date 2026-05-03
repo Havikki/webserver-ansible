@@ -2,7 +2,7 @@
 
 Ansible-rooli joka asentaa ja konfiguroi valitun webpalvelimen (Apache2 tai Nginx) automaattisesti — valintasi mukaan interaktiivisesti asennuksen aikana. Tukee myös HTTPS-sertifikaatin hankkimista Certbotin avulla.
 
-**Tekijä:** Joonas Laine | [joonaslaine.com](https://joonaslaine.com) | [GitHub: Havikki](https://github.com/Havikki)  
+**Tekijät:** Joonas Laine | Juho Talvitie | Joni Voong  
 **Lisenssi:** GNU General Public License v3.0
 
 ---
