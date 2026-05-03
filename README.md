@@ -32,7 +32,7 @@ cd webserver-ansible
 2. Aja playbook:
 
 ```bash
-ansible-playbook -i inventory site.yml
+ansible-playbook -i inventory site.yml -K
 ```
 
 Playbook kysyy asennuksen alussa:
