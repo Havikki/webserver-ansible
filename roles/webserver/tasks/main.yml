@@ -5,7 +5,7 @@
     cache_valid_time: 3600
 
 - name: Asenna valittu webpalvelin
-  include_tasks: "{{ webserver }}.yml"
+  include_tasks: "{{ 'apache' if webserver == 'apache2' else 'nginx' }}.yml"
 
 - name: Kopioi etusivu
   template:
