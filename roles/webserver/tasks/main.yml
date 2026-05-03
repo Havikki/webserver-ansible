@@ -4,8 +4,12 @@
     update_cache: yes
     cache_valid_time: 3600
 
+- name: Aseta tasks-tiedoston nimi
+  set_fact:
+    webserver_tasks_file: "{{ 'apache' if webserver == 'apache2' else 'nginx' }}.yml"
+
 - name: Asenna valittu webpalvelin
-  include_tasks: "{{ 'apache' if webserver == 'apache2' else 'nginx' }}.yml"
+  include_tasks: "{{ webserver_tasks_file }}"
 
 - name: Kopioi etusivu
   template:
