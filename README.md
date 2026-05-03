@@ -9,7 +9,7 @@ Ansible-rooli joka asentaa ja konfiguroi valitun webpalvelimen (Apache2 tai Ngin
 
 ## Lopputulos
 
-![Kuvakaappaus asennetusta sivusta](screenshot.png)
+![Kuvakaappaus asennetusta sivusta](https://github.com/Havikki/webserver-ansible/issues/1#issue-4372489483)
 
 ---
 
