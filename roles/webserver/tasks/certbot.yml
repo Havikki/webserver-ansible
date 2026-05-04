@@ -1,14 +1,18 @@
 ---
+- name: Päivitä pakettivälimuisti ennen certbot-asennusta
+  apt:
+    update_cache: yes
+
 - name: Asenna certbot ja oikea plugin
   apt:
     name:
       - certbot
-      - "python3-certbot-{{ webserver }}"
+      - "python3-certbot-{{ 'apache' if webserver == 'apache2' else 'nginx' }}"
     state: present
 
 - name: Hanki TLS-sertifikaatti ({{ domain }})
   command: >
-    certbot --{{ webserver }}
+    certbot --{{ webserver if webserver == 'nginx' else 'apache' }}
     --non-interactive
     --agree-tos
     --email {{ email }}
