@@ -22,7 +22,7 @@ Ansible-rooli joka asentaa ja konfiguroi valitun webpalvelimen (Apache2 tai Ngin
 ## Asennus
 
 ```bash
-git clone https://github.com/Havikki/webserver-ansible
+git clone https://github.com/Havikki/webserver-ansible.git
 cd webserver-ansible
 ```
 
