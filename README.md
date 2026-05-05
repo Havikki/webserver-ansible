@@ -64,6 +64,6 @@ webserver-ansible/
             └── nginx.conf.j2       # server block -konfiguraatio
 ```
 
-## Lisenssi
+## Raportti paketin teosta
 
-GNU General Public License v3.0 — katso [LICENSE](LICENSE)
+Tämä paketti oli osana [Palvelinten Hallinta](https://terokarvinen.com/palvelinten-hallinta/) -kurssia. Raportin löydät [täältä](https://github.com/Havikki/palvelinten-hallinta/blob/main/h6.md).
