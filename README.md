@@ -66,4 +66,4 @@ webserver-ansible/
 
 ## Raportti paketin teosta
 
-Tämä paketti oli osana [Palvelinten Hallinta](https://terokarvinen.com/palvelinten-hallinta/) -kurssia. Raportin löydät [täältä](https://github.com/Havikki/palvelinten-hallinta/blob/main/h6.md).
+Tämä paketti tehtiin osana [Palvelinten Hallinta](https://terokarvinen.com/palvelinten-hallinta/) -kurssin lopussa tehtävää projektityötä. Raportin löydät [täältä](https://github.com/Havikki/palvelinten-hallinta/blob/main/h6.md).
